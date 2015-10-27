@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ConfigurationProperties(prefix = "env.folder")
+@SuppressWarnings("unused")
 public class EnvFolderProperty {
     private String process;
     private String read;

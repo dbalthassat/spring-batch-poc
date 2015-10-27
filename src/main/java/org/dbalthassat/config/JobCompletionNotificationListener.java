@@ -5,6 +5,4 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class JobCompletionNotificationListener extends JobExecutionListenerSupport {
-    public JobCompletionNotificationListener() {
-    }
 }

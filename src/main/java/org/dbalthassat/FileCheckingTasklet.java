@@ -15,12 +15,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class FileCheckingTasklet implements Tasklet, StepExecutionListener {
-    private final static Logger LOGGER = LoggerFactory.getLogger(FileMovingTasklet.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(FileCheckingTasklet.class);
 
     private final EnvFolderProperty envFolderProperty;
 
@@ -39,14 +38,18 @@ public class FileCheckingTasklet implements Tasklet, StepExecutionListener {
 
     @Override
     public ExitStatus afterStep(StepExecution stepExecution) {
+        Path dir = Paths.get(envFolderProperty.getRead());
+        LOGGER.debug("Checking if read directory {} contains some files...", dir);
         try {
-            Path dir = Paths.get(envFolderProperty.getRead());
             List<Path> files = Files.list(dir).filter(p -> !Files.isDirectory(p)).collect(Collectors.toList());
             if(files.isEmpty()) {
+                LOGGER.info("Read directory {} does not contain any file. The job is stopped.", dir);
                 return ExitStatus.STOPPED;
             }
+            LOGGER.info("Read directory {} is not empty. We continue the job.", dir);
             return ExitStatus.COMPLETED;
         } catch (IOException e) {
+            LOGGER.error("An error occured while checking if read directory contains files.", e);
             return ExitStatus.STOPPED;
         }
 

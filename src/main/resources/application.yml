@@ -1,5 +1,5 @@
 env:
   folder:
     read: C:\\Temp\\batch
-    process: C:\\Temp\\batch\\process\\1.txt
+    process: C:\\Temp\\batch\\process
     write: C:\\Temp\\batch

@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @SuppressWarnings("SpringJavaAutowiringInspection")
 public class MoveFileConfiguration {
     @Bean
-    public Tasklet fileMovingTasklet(EnvFolderProperty envFolderProperty) {
+    public FileMovingTasklet fileMovingTasklet(EnvFolderProperty envFolderProperty) {
         return new FileMovingTasklet(envFolderProperty);
     }
 

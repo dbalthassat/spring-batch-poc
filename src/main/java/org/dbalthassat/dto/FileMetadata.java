@@ -1,13 +1,15 @@
 package org.dbalthassat.dto;
 
-public class FileMetadata {
-    private String content;
+import java.nio.file.Path;
 
-    public String getContent() {
-        return content;
+public class FileMetadata {
+    private Path absolutePath;
+
+    public Path getAbsolutePath() {
+        return absolutePath;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setAbsolutePath(Path absolutePath) {
+        this.absolutePath = absolutePath;
     }
 }

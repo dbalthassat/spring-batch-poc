@@ -10,6 +10,7 @@ import org.springframework.batch.core.StepExecutionListener;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,6 +19,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class FileCheckingTasklet implements Tasklet, StepExecutionListener {
     private final static Logger LOGGER = LoggerFactory.getLogger(FileCheckingTasklet.class);
 
@@ -28,12 +30,12 @@ public class FileCheckingTasklet implements Tasklet, StepExecutionListener {
     }
 
     @Override
-    public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
-        return RepeatStatus.FINISHED;
+    public void beforeStep(StepExecution stepExecution) {
     }
 
     @Override
-    public void beforeStep(StepExecution stepExecution) {
+    public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
+        return RepeatStatus.FINISHED;
     }
 
     @Override

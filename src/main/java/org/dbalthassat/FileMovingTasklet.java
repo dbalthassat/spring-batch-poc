@@ -52,7 +52,6 @@ public class FileMovingTasklet implements Tasklet, StepExecutionListener {
     @Override
     public ExitStatus afterStep(StepExecution stepExecution) {
         if(filepath != null) {
-            LOGGER.info(">>>>>>>>>>>>>> Put {} in filepath key <<<<<<<<<<<<<<", filepath.toString());
             stepExecution.getJobExecution().getExecutionContext().put("filepath", filepath);
         }
         return ExitStatus.COMPLETED;

@@ -16,6 +16,7 @@ public class MetadataReader implements ItemReader<FileMetadata>, StepExecutionLi
     private final static Logger LOGGER = LoggerFactory.getLogger(MetadataReader.class);
     private Path filepath;
     private boolean done;
+
     @Override
     public FileMetadata read() throws Exception {
         if(done) {
@@ -23,15 +24,14 @@ public class MetadataReader implements ItemReader<FileMetadata>, StepExecutionLi
         }
         done = true;
         FileMetadata metadata = new FileMetadata();
-        metadata.setAbsolutePath(filepath.toAbsolutePath());
+        metadata.setFilename(filepath.getFileName());
         return metadata;
     }
 
     @Override
     public void beforeStep(StepExecution stepExecution) {
-        LOGGER.info(">>>>>>>>>>>>>> Read filepath key <<<<<<<<<<<<<<");
         this.filepath = (Path) stepExecution.getJobExecution().getExecutionContext().get("filepath");
-        LOGGER.info(">>>>>>>>>>>>>> value={}) <<<<<<<<<<<<<<", filepath.toString());
+        this.done = false;
     }
 
     @Override

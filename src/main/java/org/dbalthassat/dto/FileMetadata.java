@@ -3,13 +3,13 @@ package org.dbalthassat.dto;
 import java.nio.file.Path;
 
 public class FileMetadata {
-    private Path absolutePath;
+    private Path filename;
 
-    public Path getAbsolutePath() {
-        return absolutePath;
+    public Path getFilename() {
+        return filename;
     }
 
-    public void setAbsolutePath(Path absolutePath) {
-        this.absolutePath = absolutePath;
+    public void setFilename(Path filename) {
+        this.filename = filename;
     }
 }

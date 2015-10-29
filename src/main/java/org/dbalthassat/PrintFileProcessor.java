@@ -15,17 +15,18 @@ public class PrintFileProcessor implements ItemProcessor<FileMetadata, FileMetad
 
     @Override
     public void beforeStep(StepExecution stepExecution) {
+        LOGGER.info("Begin processor PrintFileProcessor");
     }
 
     @Override
     public FileMetadata process(FileMetadata fileMetadata) throws Exception {
-        System.out.println(fileMetadata.getAbsolutePath());
+        System.out.println(fileMetadata.getFilename());
         return fileMetadata;
     }
 
     @Override
     public ExitStatus afterStep(StepExecution stepExecution) {
-        LOGGER.info("End of step with status {}", ExitStatus.COMPLETED);
+        LOGGER.info("End of processor PrintFileProcessor with status {}", ExitStatus.COMPLETED);
         return ExitStatus.COMPLETED;
     }
 }

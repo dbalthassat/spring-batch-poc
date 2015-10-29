@@ -16,6 +16,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,9 +42,10 @@ public class FileMovingTasklet implements Tasklet, StepExecutionListener {
         if(!files.isEmpty()) {
             Path file = files.get(0);
             Path dest = Paths.get(envFolderProperty.getProcess() + File.separator + file.getFileName());
-            // TODO purge?
             LOGGER.info("Moving {} to {}", file, dest);
-            Files.move(file, dest);
+            // StandardCopyOption.REPLACE_EXISTING because the working directory is not cleared but in a real application
+            // we should.
+            Files.move(file, dest, StandardCopyOption.REPLACE_EXISTING);
             filepath = dest;
         }
         return RepeatStatus.FINISHED;
